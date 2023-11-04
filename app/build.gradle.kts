@@ -23,7 +23,7 @@ android {
     namespace = "io.readian.android"
 
     defaultConfig {
-        applicationId = "io.readian.android"
+        applicationId = "io.readian.uniapp"
         versionCode = localProperties.getProperty("version.code", "9999").toInt()
         versionName = localProperties.getProperty("version.name", "DEV")
 
