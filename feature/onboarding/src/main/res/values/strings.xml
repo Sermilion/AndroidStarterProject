@@ -1,0 +1,5 @@
+<resources>
+    <string name="label_app_name">Uniapp</string>
+    <string name="label_login">Login</string>
+    <string name="label_register">Register</string>
+</resources>

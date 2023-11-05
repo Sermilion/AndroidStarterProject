@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 val Primary = Color(0xFF63C8FF)
 val PrimaryDisabled = Color(0x8036A0DA)
 val PrimaryDark = Color(0xFF0E173F)
+val surface = Color(0xFF607ccd)
 
 val Light1 = Color(0xFFFFFFFF)
 val Light2 = Color(0xFFf2f2f2)
@@ -55,7 +56,7 @@ internal val DarkGreenGray99 = Color(0xFFFBFDF7)
 internal val DarkPurpleGray10 = Color(0xFF201A1B)
 internal val DarkPurpleGray90 = Color(0xFFECDFE0)
 internal val DarkPurpleGray95 = Color(0xFFFAEEEF)
-internal val DarkPurpleGray99 = Color(0xFFFCFCFC)
+
 internal val Green10 = Color(0xFF00210B)
 internal val Green20 = Color(0xFF003919)
 internal val Green30 = Color(0xFF005227)
