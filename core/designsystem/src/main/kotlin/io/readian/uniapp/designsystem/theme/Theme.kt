@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 
 @VisibleForTesting
 val LightDefaultColorScheme = lightColorScheme(
-    primary = Primary,
+    primary = Purple40,
     onPrimary = Color.White,
     primaryContainer = Purple90,
     onPrimaryContainer = Purple10,
@@ -33,18 +33,21 @@ val LightDefaultColorScheme = lightColorScheme(
     onError = Color.White,
     errorContainer = Red90,
     onErrorContainer = Red10,
-    background = surface,
+    background = DarkPurpleGray99,
     onBackground = DarkPurpleGray10,
-    surface = surface,
+    surface = DarkPurpleGray99,
     onSurface = DarkPurpleGray10,
     surfaceVariant = PurpleGray90,
     onSurfaceVariant = PurpleGray30,
     outline = PurpleGray50,
 )
 
+/**
+ * Dark default theme color scheme
+ */
 @VisibleForTesting
 val DarkDefaultColorScheme = darkColorScheme(
-    primary = Primary,
+    primary = Purple80,
     onPrimary = Purple20,
     primaryContainer = Purple30,
     onPrimaryContainer = Purple90,
@@ -60,15 +63,18 @@ val DarkDefaultColorScheme = darkColorScheme(
     onError = Red20,
     errorContainer = Red30,
     onErrorContainer = Red90,
-    background = surface,
+    background = DarkPurpleGray10,
     onBackground = DarkPurpleGray90,
-    surface = surface,
+    surface = DarkPurpleGray10,
     onSurface = DarkPurpleGray90,
     surfaceVariant = PurpleGray30,
     onSurfaceVariant = PurpleGray80,
     outline = PurpleGray60,
 )
 
+/**
+ * Light Android theme color scheme
+ */
 @VisibleForTesting
 val LightAndroidColorScheme = lightColorScheme(
     primary = Green40,
@@ -87,9 +93,9 @@ val LightAndroidColorScheme = lightColorScheme(
     onError = Color.White,
     errorContainer = Red90,
     onErrorContainer = Red10,
-    background = surface,
+    background = DarkGreenGray99,
     onBackground = DarkGreenGray10,
-    surface = surface,
+    surface = DarkGreenGray99,
     onSurface = DarkGreenGray10,
     surfaceVariant = GreenGray90,
     onSurfaceVariant = GreenGray30,
@@ -117,9 +123,9 @@ val DarkAndroidColorScheme = darkColorScheme(
     onError = Red20,
     errorContainer = Red30,
     onErrorContainer = Red90,
-    background = surface,
+    background = DarkGreenGray10,
     onBackground = DarkGreenGray90,
-    surface = surface,
+    surface = DarkGreenGray10,
     onSurface = DarkGreenGray90,
     surfaceVariant = GreenGray30,
     onSurfaceVariant = GreenGray80,

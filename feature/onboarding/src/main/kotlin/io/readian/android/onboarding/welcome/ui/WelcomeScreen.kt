@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import io.readian.android.feature.onboarding.R
 import io.readian.uniapp.designsystem.component.HeaderText
 import io.readian.uniapp.designsystem.component.PrimaryButton
-import io.readian.uniapp.designsystem.theme.surface
 
 @Composable
 fun WelcomeScreen() {
@@ -28,8 +27,6 @@ fun WelcomeScreen() {
     Column(
       modifier = Modifier
         .fillMaxSize()
-        // TODO: change to ReadianTheme
-        .background(color = surface)
         .padding(paddingValues),
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {

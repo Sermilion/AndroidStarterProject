@@ -2,37 +2,6 @@ package io.readian.uniapp.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Primary = Color(0xFF63C8FF)
-val PrimaryDisabled = Color(0x8036A0DA)
-val PrimaryDark = Color(0xFF0E173F)
-val surface = Color(0xFF607ccd)
-
-val Light1 = Color(0xFFFFFFFF)
-val Light2 = Color(0xFFf2f2f2)
-val Light3 = Color(0xFFF6F7F8)
-val Light4 = Color(0xFFE9EAEA)
-val Light5 = Color(0xFFC1C1C1)
-val Light6 = Color(0xFFc7c9cc)
-val Light7 = Color(0xFFA9ACB2)
-val Light8 = Color(0xFF979AA1)
-
-val Dark1 = Color(0xFF000000)
-val Dark2 = Color(0xFF010101)
-val Dark3 = Color(0xFF1A1C1F)
-val Dark4 = Color(0xFF222222)
-val Dark5 = Color(0x200E173F)
-val Dark6 = Color(0x99373C3F)
-val Dark7 = Color(0x99545452)
-val Dark8 = Color(0xFF4E546A)
-
-val Transparent = Color(0x00FFFFFF)
-
-val Positive = Color(0xFF3ad26d)
-val Negative = Color(0xFFFF585B)
-
-val Red = Color(0xFFea4336)
-val Salmon = Color(0xFFFF585B)
-
 /**
  * Now in Android colors.
  */
@@ -56,7 +25,7 @@ internal val DarkGreenGray99 = Color(0xFFFBFDF7)
 internal val DarkPurpleGray10 = Color(0xFF201A1B)
 internal val DarkPurpleGray90 = Color(0xFFECDFE0)
 internal val DarkPurpleGray95 = Color(0xFFFAEEEF)
-
+internal val DarkPurpleGray99 = Color(0xFFFCFCFC)
 internal val Green10 = Color(0xFF00210B)
 internal val Green20 = Color(0xFF003919)
 internal val Green30 = Color(0xFF005227)

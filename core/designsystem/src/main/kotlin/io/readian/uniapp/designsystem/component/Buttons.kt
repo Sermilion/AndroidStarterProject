@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import io.readian.uniapp.designsystem.theme.surface
 
 @Composable
 fun PrimaryButton(
@@ -33,7 +32,6 @@ fun PrimaryButton(
     Text(
       text = text,
       // TODO: change to ReadianTheme
-      color = surface,
     )
   }
 }
