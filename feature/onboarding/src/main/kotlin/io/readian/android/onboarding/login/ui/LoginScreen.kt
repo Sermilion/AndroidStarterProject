@@ -1,4 +1,4 @@
-package io.readian.android.onboarding.login
+package io.readian.android.onboarding.login.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

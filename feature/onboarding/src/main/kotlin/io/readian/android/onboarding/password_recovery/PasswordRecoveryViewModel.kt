@@ -1,4 +1,4 @@
-package io.readian.android.onboarding.PasswordRecovery
+package io.readian.android.onboarding.password_recovery
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
