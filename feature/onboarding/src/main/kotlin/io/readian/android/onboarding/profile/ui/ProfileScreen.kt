@@ -33,7 +33,9 @@ import io.readian.uniapp.designsystem.icon.UserPlaceholder
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+  onBackClick: () -> Unit,
+) {
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
     topBar = {
@@ -42,9 +44,7 @@ fun ProfileScreen() {
 
         },
         navigationIcon = {
-          IconButton(
-            onClick = {},
-          ) {
+          IconButton(onClick = onBackClick) {
             Icon(
               imageVector = Icons.Outlined.ArrowBack,
               contentDescription = null,
@@ -56,9 +56,9 @@ fun ProfileScreen() {
   ) { paddingValues ->
     Column(
       modifier = Modifier
-        .fillMaxSize()
-        .background(color = MaterialTheme.colorScheme.surface)
-        .padding(paddingValues),
+          .fillMaxSize()
+          .background(color = MaterialTheme.colorScheme.surface)
+          .padding(paddingValues),
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
@@ -66,12 +66,18 @@ fun ProfileScreen() {
         imageVector = ReadianIcons.UserPlaceholder,
         contentDescription = null,
         modifier = Modifier
-          .size(160.dp)
-          .padding(top = 36.dp),
+            .size(160.dp)
+            .padding(top = 36.dp),
         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
       )
 
       // TODO: text for name
+
+      Text(
+        text = "Fedora Yuki",
+        modifier = Modifier
+      )
+
 
       Divider(modifier = Modifier.padding(start = 16.dp))
       ProfileElement(
@@ -105,18 +111,18 @@ private fun ProfileElement(
   Surface(
     onClick = onClick,
     modifier = Modifier
-      .fillMaxWidth()
-      .height(50.dp)
-      .padding(horizontal = 18.dp)
-      .then(modifier),
+        .fillMaxWidth()
+        .height(50.dp)
+        .padding(horizontal = 18.dp)
+        .then(modifier),
   ) {
     Column(modifier = Modifier.fillMaxSize()) {
       Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-          .fillMaxWidth()
-          .height(48.dp),
+            .fillMaxWidth()
+            .height(48.dp),
       ) {
         Text(
           text = name,

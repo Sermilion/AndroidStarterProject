@@ -35,17 +35,17 @@ import io.readian.uniapp.designsystem.component.PrimaryButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+  onBackClick: () -> Unit,
+  onForgotPasswordClick: () -> Unit,
+) {
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
     topBar = {
       TopAppBar(
         title = {},
         navigationIcon = {
-          IconButton(
-            onClick = {}
-            ,
-          ) {
+          IconButton(onClick = onBackClick) {
             Icon(
               imageVector = Icons.Outlined.ArrowBack,
               contentDescription = null,
@@ -88,7 +88,7 @@ fun LoginScreen() {
         modifier = Modifier.padding(top = 8.dp),
       )
 
-      TextButton(onClick = { /*TODO*/ }) {
+      TextButton(onClick = onForgotPasswordClick) {
         Text(
           text = "Forgot password?",
           style = MaterialTheme.typography.bodyMedium,

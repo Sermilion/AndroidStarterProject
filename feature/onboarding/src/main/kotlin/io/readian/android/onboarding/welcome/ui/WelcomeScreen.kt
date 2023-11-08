@@ -19,7 +19,10 @@ import io.readian.uniapp.designsystem.component.HeaderText
 import io.readian.uniapp.designsystem.component.PrimaryButton
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+  onLoginClick: () -> Unit,
+  onRegisterClick: () -> Unit,
+) {
 
   Scaffold(
     modifier = Modifier.fillMaxSize(),
@@ -46,17 +49,13 @@ fun WelcomeScreen() {
 
       PrimaryButton(
         text = stringResource(id = R.string.label_login),
-        onClick = {
-
-        },
+        onClick = onLoginClick,
         modifier = Modifier.padding(top = 32.dp)
       )
 
       PrimaryButton(
         text = stringResource(id = R.string.label_register),
-        onClick = {
-
-        }
+        onClick = onRegisterClick,
       )
     }
   }

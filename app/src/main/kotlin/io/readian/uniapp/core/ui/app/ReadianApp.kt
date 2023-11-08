@@ -29,7 +29,7 @@ import kotlinx.collections.immutable.ImmutableList
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun ReadianApp(
+fun UniappApp(
   modifier: Modifier = Modifier,
   appState: ReadianAppState = rememberReadianAppState(),
 //  scope: CoroutineScope = rememberCoroutineScope(),

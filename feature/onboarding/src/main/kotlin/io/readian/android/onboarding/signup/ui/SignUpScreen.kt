@@ -33,7 +33,9 @@ import io.readian.uniapp.designsystem.component.PrimaryButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(
+  onBackClick: () -> Unit,
+) {
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
     topBar = {
@@ -41,9 +43,7 @@ fun SignUpScreen() {
         title = {},
         navigationIcon = {
           IconButton(
-            onClick = {
-
-            },
+            onClick = onBackClick,
           ) {
             Icon(
               imageVector = Icons.Outlined.ArrowBack,
