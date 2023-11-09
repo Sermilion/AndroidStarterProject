@@ -1,9 +1,0 @@
-<resources>
-    <string name="label_app_name">Uniapp</string>
-    <string name="label_login">Login</string>
-    <string name="label_register">Register</string>
-    <string name="label_log_in">Log in</string>
-    <string name="label_password_recovery">Password recovery</string>
-    <string name="label_continue">Continue</string>
-    <string name="label_sign_up">Sign Up</string>
-</resources>

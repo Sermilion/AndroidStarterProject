@@ -18,13 +18,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
-import io.readian.uniapp.core.ui.navigation.ReadianNavHost
+import io.readian.uniapp.core.ui.navigation.UniappNavHost
 import io.readian.uniapp.core.ui.navigation.ReadianNavigationBar
 import io.readian.uniapp.core.ui.navigation.ReadianNavigationBarItem
 import io.readian.uniapp.core.ui.navigation.TopLevelDestination
 import io.readian.uniapp.core.update.UpdateChecker
-import io.readian.uniapp.designsystem.component.ReadianBackground
-import io.readian.uniapp.designsystem.theme.ReadianTheme
+import io.readian.uniapp.core.designsystem.component.ReadianBackground
+import io.readian.uniapp.core.designsystem.theme.ReadianTheme
 import kotlinx.collections.immutable.ImmutableList
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -62,7 +62,7 @@ fun UniappApp(
                                 ),
                             ),
                     ) {
-                        ReadianNavHost(
+                        UniappNavHost(
                             navController = appState.navController,
 //              onBackClick = appState::onBackClick,
 //              onNavigateToDestination = appState::navigate,

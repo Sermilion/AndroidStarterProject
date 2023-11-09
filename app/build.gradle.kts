@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.readian.android.application.flavors)
     alias(libs.plugins.readian.android.application.jacoco)
     alias(libs.plugins.readian.android.hilt)
+    alias(libs.plugins.readian.android.room)
     id("jacoco")
     alias(libs.plugins.readian.android.application.firebase)
 }
@@ -84,10 +85,6 @@ protobuf {
 
 dependencies {
     coreLibraryDesugaring(libs.android.desugarJdkLibs)
-
-    implementation(project(":core:designsystem"))
-    implementation(project(":core:navigation"))
-    implementation(project(":feature:onboarding"))
 
     androidTestImplementation(kotlin("test"))
 

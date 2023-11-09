@@ -21,10 +21,3 @@ rootProject.name = "Uniapp"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
-include(":core:designsystem")
-include(":core:common")
-include(":core:navigation")
-include(":core:data")
-include(":feature")
-include(":feature:onboarding")
-include(":core:database")
