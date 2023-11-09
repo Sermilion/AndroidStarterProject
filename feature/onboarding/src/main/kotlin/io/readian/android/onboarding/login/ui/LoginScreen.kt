@@ -38,6 +38,7 @@ import io.readian.uniapp.designsystem.component.PrimaryButton
 fun LoginScreen(
   onBackClick: () -> Unit,
   onForgotPasswordClick: () -> Unit,
+
 ) {
   Scaffold(
     modifier = Modifier.systemBarsPadding(),

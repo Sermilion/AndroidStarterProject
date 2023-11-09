@@ -26,7 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import io.readian.android.feature.onboarding.R
+import io.readian.android.onboarding.signup.SignUpViewModel
 import io.readian.uniapp.designsystem.component.CredentialTextField
 import io.readian.uniapp.designsystem.component.HeaderText
 import io.readian.uniapp.designsystem.component.PrimaryButton
@@ -34,7 +36,9 @@ import io.readian.uniapp.designsystem.component.PrimaryButton
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen(
+  viewModel: SignUpViewModel = hiltViewModel(),
   onBackClick: () -> Unit,
+  onLoginSuccess: () -> Unit,
 ) {
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
@@ -101,7 +105,12 @@ fun SignUpScreen(
       PrimaryButton(
         text = stringResource(id = R.string.label_sign_up),
         onClick = {
-
+          viewModel.signUp(
+            username = username,
+            email = email,
+            password = password,
+          )
+          onLoginSuccess()
         },
         modifier = Modifier.padding(top = 22.dp),
       )

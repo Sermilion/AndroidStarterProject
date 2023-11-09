@@ -86,6 +86,7 @@ fun NavGraphBuilder.loginGraph(
 
 fun NavGraphBuilder.registrationGraph(
   onBackClick: () -> Unit,
+  onLoginSuccess: () -> Unit,
 ) {
   navigation(
     route = RegistrationDestination.route,
@@ -94,7 +95,10 @@ fun NavGraphBuilder.registrationGraph(
     composable(
       route = RegistrationDestination.destination,
     ) {
-      SignUpScreen(onBackClick = onBackClick)
+      SignUpScreen(
+        onBackClick = onBackClick,
+        onLoginSuccess = onLoginSuccess,
+      )
     }
   }
 }

@@ -42,7 +42,10 @@ fun ReadianNavHost(
     )
 
     registrationGraph(
-      onBackClick = { navController.navigateUp() }
+      onBackClick = { navController.navigateUp() },
+      onLoginSuccess = {
+        navController.navigateToLoginGraph()
+      }
     )
 
     forgotPasswordGraph(
