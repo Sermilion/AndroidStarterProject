@@ -2,6 +2,7 @@ package io.readian.uniapp.core.data.repository
 
 import io.readian.uniapp.core.database.UniAppDatabase
 import io.readian.uniapp.core.database.model.UserDataModel
+import io.readian.uniapp.core.database.model.UserType
 import javax.inject.Inject
 
 class UniAppRepository @Inject constructor(
@@ -11,12 +12,14 @@ class UniAppRepository @Inject constructor(
     username: String,
     email: String,
     password: String,
+    type: UserType,
   ) {
     database.userDao().insertUser(
       UserDataModel(
         username = username,
         email = email,
         password = password,
+        type = type,
       )
     )
   }

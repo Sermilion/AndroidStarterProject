@@ -2,19 +2,27 @@ package io.readian.uniapp.feature.onboarding.signup.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,16 +35,51 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.readian.android.R
+import io.readian.uniapp.core.database.model.UserType
+import io.readian.uniapp.core.designsystem.component.CredentialTextField
+import io.readian.uniapp.core.designsystem.component.HeaderText
 import io.readian.uniapp.core.designsystem.component.PrimaryButton
+import io.readian.uniapp.core.designsystem.component.UniAppDropdownMenu
 import io.readian.uniapp.feature.onboarding.signup.SignUpViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun SignUpScreen(
   viewModel: SignUpViewModel = hiltViewModel(),
   onBackClick: () -> Unit,
   onLoginSuccess: () -> Unit,
+) {
+  val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+  SignUpScreen(
+    typeList = state,
+    onBackClick = onBackClick,
+    onSignUpClick = { username, email, password, type ->
+      viewModel.signUp(
+        username = username,
+        email = email,
+        password = password,
+        type = type,
+      )
+      onLoginSuccess()
+    }
+  )
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SignUpScreen(
+  typeList: List<String>,
+  onBackClick: () -> Unit,
+  onSignUpClick: (
+    username: String,
+    email: String,
+    password: String,
+    type: UserType,
+  ) -> Unit,
 ) {
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
@@ -67,13 +110,15 @@ fun SignUpScreen(
       var username by remember { mutableStateOf("") }
       var email by remember { mutableStateOf("") }
       var password by remember { mutableStateOf("") }
+      var dropDownMenuExpanded by remember { mutableStateOf(false) }
+      var userType by remember { mutableStateOf(UserType.None) }
 
-      io.readian.uniapp.core.designsystem.component.HeaderText(
+      HeaderText(
         text = stringResource(id = R.string.label_sign_up),
         modifier = Modifier.padding(top = 32.dp)
       )
 
-      io.readian.uniapp.core.designsystem.component.CredentialTextField(
+      CredentialTextField(
         value = username,
         label = "Enter username",
         onValueChanged = {
@@ -82,7 +127,7 @@ fun SignUpScreen(
         modifier = Modifier.padding(top = 10.dp)
       )
 
-      io.readian.uniapp.core.designsystem.component.CredentialTextField(
+      CredentialTextField(
         value = email,
         label = "Enter email",
         onValueChanged = {
@@ -91,7 +136,7 @@ fun SignUpScreen(
         modifier = Modifier.padding(top = 8.dp),
       )
 
-      io.readian.uniapp.core.designsystem.component.CredentialTextField(
+      CredentialTextField(
         value = password,
         label = "Enter password",
         onValueChanged = {
@@ -100,17 +145,19 @@ fun SignUpScreen(
         modifier = Modifier.padding(top = 8.dp),
       )
 
+      UniAppDropdownMenu(items = typeList)
+
       PrimaryButton(
         text = stringResource(id = R.string.label_sign_up),
         onClick = {
-          viewModel.signUp(
-            username = username,
-            email = email,
-            password = password,
+          onSignUpClick(
+            username,
+            email,
+            password,
+            userType,
           )
-          onLoginSuccess()
         },
-        modifier = Modifier.padding(top = 22.dp),
+        modifier = Modifier.padding(top = 12.dp),
       )
 
       Row {
@@ -140,3 +187,6 @@ fun SignUpScreen(
     }
   }
 }
+
+
+

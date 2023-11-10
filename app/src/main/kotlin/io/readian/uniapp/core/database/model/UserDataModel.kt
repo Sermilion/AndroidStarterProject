@@ -9,9 +9,16 @@ data class UserDataModel(
   @PrimaryKey val email: String,
   val username: String,
   val password: String,
+  val type: UserType,
 )
 
-//username | email        | password
-//----------------------------------
-//ibragim  | ibra@mail.ru | 123456
-//milana   | milana@mil.ru| sdfsdfs
+enum class UserType {
+  Advertiser,
+  Company,
+  None,
+}
+
+//username | email        | password |  type
+//----------------------------------------------
+//ibragim  | ibra@mail.ru | 123456   | company
+//milana   | milana@mil.ru| sdfsdfs  | advertiser
