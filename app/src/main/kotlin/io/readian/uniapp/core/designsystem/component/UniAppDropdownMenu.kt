@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +21,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun UniAppDropdownMenu(
   items: List<String>,
+  modifier: Modifier = Modifier,
+  onItemSelected: (String) -> Unit,
 ) {
   var expanded by remember { mutableStateOf(false) }
   var selectedIndex by remember { mutableStateOf(0) }
@@ -30,6 +33,7 @@ fun UniAppDropdownMenu(
       .padding(top = 8.dp)
       .padding(horizontal = 32.dp)
       .wrapContentSize(Alignment.Center)
+      .then(modifier)
   ) {
     Text(
       items[selectedIndex],
@@ -38,7 +42,7 @@ fun UniAppDropdownMenu(
         .padding(horizontal = 4.dp)
         .clickable(onClick = { expanded = true })
     )
-    androidx.compose.material3.DropdownMenu(
+    DropdownMenu(
       expanded = expanded,
       onDismissRequest = { expanded = false },
       modifier = Modifier
@@ -51,6 +55,7 @@ fun UniAppDropdownMenu(
           onClick = {
             selectedIndex = index
             expanded = false
+            onItemSelected(item)
           })
       }
     }

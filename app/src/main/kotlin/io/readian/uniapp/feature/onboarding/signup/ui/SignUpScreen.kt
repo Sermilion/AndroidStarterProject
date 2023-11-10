@@ -110,7 +110,6 @@ fun SignUpScreen(
       var username by remember { mutableStateOf("") }
       var email by remember { mutableStateOf("") }
       var password by remember { mutableStateOf("") }
-      var dropDownMenuExpanded by remember { mutableStateOf(false) }
       var userType by remember { mutableStateOf(UserType.None) }
 
       HeaderText(
@@ -145,7 +144,12 @@ fun SignUpScreen(
         modifier = Modifier.padding(top = 8.dp),
       )
 
-      UniAppDropdownMenu(items = typeList)
+      UniAppDropdownMenu(
+        items = typeList,
+        onItemSelected = {
+          userType = UserType.valueOf(it)
+        },
+      )
 
       PrimaryButton(
         text = stringResource(id = R.string.label_sign_up),
