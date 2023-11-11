@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.readian.android.R
+import io.readian.uniapp.core.designsystem.component.HeaderText
 
 @Composable
 fun WelcomeScreen(
@@ -30,7 +31,7 @@ fun WelcomeScreen(
         .padding(paddingValues),
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-      io.readian.uniapp.core.designsystem.component.HeaderText(
+      HeaderText(
         text = stringResource(id = R.string.label_app_name),
         modifier = Modifier.padding(top = 32.dp)
       )

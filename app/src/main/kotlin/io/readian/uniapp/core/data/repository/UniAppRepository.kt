@@ -1,7 +1,7 @@
 package io.readian.uniapp.core.data.repository
 
 import io.readian.uniapp.core.database.UniAppDatabase
-import io.readian.uniapp.core.database.model.AdvertiserDataModel
+import io.readian.uniapp.core.database.model.AdDataModel
 import io.readian.uniapp.core.database.model.UserDataModel
 import io.readian.uniapp.core.database.model.UserType
 import kotlinx.coroutines.flow.Flow
@@ -36,11 +36,11 @@ class UniAppRepository @Inject constructor(
     )
   }
 
-  fun getAdvertisers(): Flow<List<AdvertiserDataModel>> {
+  fun getAds(): Flow<List<AdDataModel>> {
     return database.advertisersDao().getAll()
   }
 
-  suspend fun getAdvertiserByName(name: String): AdvertiserDataModel? {
+  suspend fun getAdsByName(name: String): AdDataModel? {
     return database.advertisersDao().selectByName(name)
   }
 
@@ -53,7 +53,7 @@ class UniAppRepository @Inject constructor(
     username: String,
   ) {
     database.advertisersDao().insert(
-      AdvertiserDataModel(
+      AdDataModel(
         name = name,
         price = price,
         description = description,

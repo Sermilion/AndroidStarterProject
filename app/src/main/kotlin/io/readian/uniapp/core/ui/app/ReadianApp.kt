@@ -1,5 +1,6 @@
 package io.readian.uniapp.core.ui.app
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,7 +33,7 @@ import kotlinx.collections.immutable.ImmutableList
 @Composable
 fun UniappApp(
   modifier: Modifier = Modifier,
-  appState: ReadianAppState = rememberReadianAppState(),
+  appState: UniAppAppState = rememberReadianAppState(),
 //  scope: CoroutineScope = rememberCoroutineScope(),
 ) {
     ReadianTheme {
@@ -39,7 +41,9 @@ fun UniappApp(
             UpdateChecker {
                 val topLevelDestinations = appState.topLevelDestinations
                 Scaffold(
-                    modifier = Modifier.systemBarsPadding().then(modifier),
+                    modifier = Modifier
+                        .systemBarsPadding()
+                        .then(modifier),
                     bottomBar = {
                         if (appState.showBottomNavigation) {
                             ReadianBottomBar(

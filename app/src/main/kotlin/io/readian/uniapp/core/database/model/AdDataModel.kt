@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class AdvertiserDataModel(
+data class AdDataModel(
   val username: String,
   @PrimaryKey val name: String,
   val price: Int,

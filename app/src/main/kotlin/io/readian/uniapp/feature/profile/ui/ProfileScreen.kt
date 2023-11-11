@@ -1,4 +1,4 @@
-package io.readian.uniapp.feature.onboarding.profile.ui
+package io.readian.uniapp.feature.profile.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

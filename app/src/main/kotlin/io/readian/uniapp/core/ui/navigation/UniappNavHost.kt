@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import io.readian.uniapp.feature.adlist.navigation.adListGraph
+import io.readian.uniapp.feature.adlist.navigation.navigateToAdListGraph
 import io.readian.uniapp.feature.onboarding.navigation.WelcomeDestination
 import io.readian.uniapp.feature.onboarding.navigation.forgotPasswordGraph
 import io.readian.uniapp.feature.onboarding.navigation.loginGraph
@@ -33,12 +35,14 @@ fun UniappNavHost(
       },
     )
 
-    //4
     loginGraph(
       onBackClick = { navController.navigateUp() },
       onForgotPasswordClick = {
         navController.navigateToForgotPasswordGraph()
-      }
+      },
+      onLogin = {
+        navController.navigateToAdListGraph()
+      },
     )
 
     registrationGraph(
@@ -51,5 +55,7 @@ fun UniappNavHost(
     forgotPasswordGraph(
       onBackClick = { navController.navigateUp() }
     )
+
+    adListGraph()
   }
 }

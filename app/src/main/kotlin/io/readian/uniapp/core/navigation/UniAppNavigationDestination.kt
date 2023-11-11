@@ -1,8 +1,8 @@
 package io.readian.uniapp.core.navigation
 
-interface NoBottomNavDestination : ReadianNavigationDestination
+interface NoBottomNavDestination : UniAppNavigationDestination
 
-interface ReadianNavigationDestination {
+interface UniAppNavigationDestination {
     /**
      * Defines a specific route this destination belongs to.
      * Route is a String that defines the path to your composable.

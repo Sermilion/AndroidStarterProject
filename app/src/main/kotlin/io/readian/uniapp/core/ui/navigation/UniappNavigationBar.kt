@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -15,7 +15,7 @@ fun ReadianNavigationBar(
 ) {
     BottomNavigation(
         modifier = modifier,
-        backgroundColor = MaterialTheme.colors.surface,
+        backgroundColor = MaterialTheme.colorScheme.surface,
         content = content,
     )
 }
@@ -39,7 +39,7 @@ fun RowScope.ReadianNavigationBarItem(
         enabled = enabled,
         label = label,
         alwaysShowLabel = alwaysShowLabel,
-        selectedContentColor = MaterialTheme.colors.primary,
+        selectedContentColor = MaterialTheme.colorScheme.primary,
         unselectedContentColor = LocalContentColor.current,
     )
 }

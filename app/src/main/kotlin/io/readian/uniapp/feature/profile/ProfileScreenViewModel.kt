@@ -1,4 +1,4 @@
-package io.readian.uniapp.feature.onboarding.profile
+package io.readian.uniapp.feature.profile
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

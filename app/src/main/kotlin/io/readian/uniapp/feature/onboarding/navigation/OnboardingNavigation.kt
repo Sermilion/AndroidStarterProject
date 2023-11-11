@@ -6,6 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import io.readian.uniapp.core.navigation.NoBottomNavDestination
+import io.readian.uniapp.feature.onboarding.login.ui.LoginScreen
 import io.readian.uniapp.feature.onboarding.password_recovery.ui.PasswordRecoveryScreen
 import io.readian.uniapp.feature.onboarding.signup.ui.SignUpScreen
 import io.readian.uniapp.feature.onboarding.welcome.ui.WelcomeScreen
@@ -67,6 +68,7 @@ fun NavGraphBuilder.welcomeGraph(
 fun NavGraphBuilder.loginGraph(
   onBackClick: () -> Unit,
   onForgotPasswordClick: () -> Unit,
+  onLogin: () -> Unit,
 ) {
   navigation(
     route = LoginDestination.route,
@@ -75,9 +77,10 @@ fun NavGraphBuilder.loginGraph(
     composable(
       route = LoginDestination.destination,
     ) {
-      io.readian.uniapp.feature.onboarding.login.ui.LoginScreen(
+      LoginScreen(
         onBackClick = onBackClick,
         onForgotPasswordClick = onForgotPasswordClick,
+        onLogin = onLogin,
       )
     }
   }

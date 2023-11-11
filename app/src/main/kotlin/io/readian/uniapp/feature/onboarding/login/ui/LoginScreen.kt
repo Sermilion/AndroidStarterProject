@@ -39,6 +39,7 @@ import io.readian.uniapp.feature.onboarding.login.LoginViewModel
 fun LoginScreen(
   onBackClick: () -> Unit,
   onForgotPasswordClick: () -> Unit,
+  onLogin: () -> Unit,
   viewModel: LoginViewModel = hiltViewModel(),
   ) {
   Scaffold(
@@ -105,6 +106,8 @@ fun LoginScreen(
             email = email,
             password = password,
           )
+          // TODO: navigate only if login is successful
+          onLogin()
         },
       )
 
