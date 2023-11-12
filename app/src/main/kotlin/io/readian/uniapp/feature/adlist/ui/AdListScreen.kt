@@ -1,8 +1,6 @@
 package io.readian.uniapp.feature.adlist.ui
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -17,7 +15,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -53,15 +50,10 @@ private fun AdListScreen(
     topBar = {
       CenterAlignedTopAppBar(
         title = {
-          Box(
-            modifier = Modifier.fillMaxWidth()
-          ) {
-            Text(
-              text = "Ad List",
-              style = MaterialTheme.typography.titleMedium,
-              modifier = Modifier.align(Alignment.Center),
-            )
-          }
+          Text(
+            text = "Ad List",
+            style = MaterialTheme.typography.titleMedium,
+          )
         },
         navigationIcon = {
           Icon(

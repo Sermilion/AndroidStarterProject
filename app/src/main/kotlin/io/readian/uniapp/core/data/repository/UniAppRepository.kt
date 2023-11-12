@@ -2,6 +2,7 @@ package io.readian.uniapp.core.data.repository
 
 import io.readian.uniapp.core.database.UniAppDatabase
 import io.readian.uniapp.core.database.model.AdDataModel
+import io.readian.uniapp.core.database.model.LoggedUser
 import io.readian.uniapp.core.database.model.UserDataModel
 import io.readian.uniapp.core.database.model.UserType
 import kotlinx.coroutines.flow.Flow
@@ -62,5 +63,21 @@ class UniAppRepository @Inject constructor(
         username = username,
       )
     )
+  }
+
+  suspend fun saveLoggedUser(
+    email: String,
+    password: String,
+    type: UserType,
+  ) {
+    database.loggedUserDao().saveLoggedUser(LoggedUser(email, password, type))
+  }
+
+  fun getLoggedUser(): Flow<LoggedUser?> {
+    return database.loggedUserDao().getLoggedUser()
+  }
+
+  suspend fun deleteLoggedUser() {
+    database.loggedUserDao().deleteLoggedUser()
   }
 }

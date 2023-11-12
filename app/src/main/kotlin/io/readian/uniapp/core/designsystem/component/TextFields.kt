@@ -9,6 +9,8 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -18,6 +20,7 @@ fun CredentialTextField(
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   isError: Boolean = false,
+  visualTransformation: VisualTransformation = VisualTransformation.None,
   onValueChanged: (String) -> Unit,
 ) {
   OutlinedTextField(
@@ -33,5 +36,6 @@ fun CredentialTextField(
     onValueChange = onValueChanged,
     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
     label = { Text(text = label) },
+    visualTransformation = visualTransformation,
   )
 }

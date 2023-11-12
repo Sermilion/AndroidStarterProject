@@ -14,25 +14,34 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.readian.android.R
 import io.readian.uniapp.core.designsystem.component.CredentialTextField
 import io.readian.uniapp.core.designsystem.component.HeaderText
 import io.readian.uniapp.core.designsystem.component.PrimaryButton
+import io.readian.uniapp.feature.onboarding.login.LoginContract
+import io.readian.uniapp.feature.onboarding.login.LoginContract.SideEffect.Navigation.LoginSuccess
 import io.readian.uniapp.feature.onboarding.login.LoginViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,9 +50,28 @@ fun LoginScreen(
   onForgotPasswordClick: () -> Unit,
   onLogin: () -> Unit,
   viewModel: LoginViewModel = hiltViewModel(),
-  ) {
+) {
+
+  val snackBarHostState = remember { SnackbarHostState() }
+  val scope = rememberCoroutineScope()
+  val context = LocalContext.current
+
+  LaunchedEffect(viewModel, onLogin, context) {
+    viewModel.effect.collect { effect ->
+      when (effect) {
+        LoginSuccess -> onLogin()
+        LoginContract.SideEffect.WrongCredentials -> {
+          scope.launch {
+            snackBarHostState.showSnackbar(context.getString(R.string.error_login))
+          }
+        }
+      }
+    }
+  }
+
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
+    snackbarHost = { SnackbarHost(snackBarHostState) },
     topBar = {
       TopAppBar(
         title = {},
@@ -88,6 +116,7 @@ fun LoginScreen(
         onValueChanged = {
           password = it
         },
+        visualTransformation = PasswordVisualTransformation(),
         modifier = Modifier.padding(top = 8.dp),
       )
 
@@ -106,8 +135,6 @@ fun LoginScreen(
             email = email,
             password = password,
           )
-          // TODO: navigate only if login is successful
-          onLogin()
         },
       )
 

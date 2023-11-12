@@ -4,14 +4,17 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import io.readian.uniapp.core.database.dao.AdvertisersDao
+import io.readian.uniapp.core.database.dao.LoggedUserDao
 import io.readian.uniapp.core.database.dao.UserDao
 import io.readian.uniapp.core.database.model.AdDataModel
+import io.readian.uniapp.core.database.model.LoggedUser
 import io.readian.uniapp.core.database.model.UserDataModel
 
 @Database(
     entities = [
         UserDataModel::class,
         AdDataModel::class,
+        LoggedUser::class,
     ],
     version = 1,
     exportSchema = true,
@@ -20,4 +23,6 @@ import io.readian.uniapp.core.database.model.UserDataModel
 abstract class UniAppDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun advertisersDao(): AdvertisersDao
+
+    abstract fun loggedUserDao(): LoggedUserDao
 }

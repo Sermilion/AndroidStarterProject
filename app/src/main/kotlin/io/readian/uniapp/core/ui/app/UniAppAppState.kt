@@ -15,12 +15,12 @@ import io.readian.android.R
 import io.readian.uniapp.core.designsystem.icon.Icon
 import io.readian.uniapp.core.navigation.UniAppNavigationDestination
 import io.readian.uniapp.core.ui.navigation.TopLevelDestination
-import io.readian.uniapp.core.ui.navigation.destinations.Profile
 import io.readian.uniapp.feature.adlist.navigation.AdListDestination
 import io.readian.uniapp.feature.onboarding.navigation.ForgotPasswordDestination
 import io.readian.uniapp.feature.onboarding.navigation.LoginDestination
 import io.readian.uniapp.feature.onboarding.navigation.RegistrationDestination
 import io.readian.uniapp.feature.onboarding.navigation.WelcomeDestination
+import io.readian.uniapp.feature.profile.navigation.ProfileDestination
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
@@ -46,7 +46,6 @@ class UniAppAppState(val navController: NavHostController) {
         LoginDestination.destination,
         ForgotPasswordDestination.destination,
         RegistrationDestination.destination -> false
-
         null -> false
         else -> true
       }
@@ -60,8 +59,8 @@ class UniAppAppState(val navController: NavHostController) {
       iconTextResource = R.string.label_ads,
     ),
     TopLevelDestination(
-      route = Profile.route,
-      destination = Profile.destination,
+      route = ProfileDestination.route,
+      destination = ProfileDestination.destination,
       selectedIcon = Icon.ImageVectorIcon(Icons.Default.House),
       iconTextResource = R.string.label_profile,
     ),

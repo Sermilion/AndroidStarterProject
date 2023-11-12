@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Readian</string>
+    <string name="app_name">Uniapp</string>
     <string name="label_ads">Ads</string>
     <string name="label_library">Library</string>
     <string name="label_profile">Profile</string>
@@ -10,4 +10,5 @@
     <string name="label_password_recovery">Password recovery</string>
     <string name="label_continue">Continue</string>
     <string name="label_sign_up">Sign Up</string>
+    <string name="error_login">Email or password is incorrect.</string>
 </resources>

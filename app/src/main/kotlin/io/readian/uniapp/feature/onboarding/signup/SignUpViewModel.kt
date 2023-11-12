@@ -45,15 +45,6 @@ class SignUpViewModel @Inject constructor(
         password = password,
         type = type,
       )
-
-      repository.saveAd(
-        name = username,
-        price = 0,
-        description = "",
-        image = "",
-        category = "",
-        username = username,
-      )
     }
   }
 }

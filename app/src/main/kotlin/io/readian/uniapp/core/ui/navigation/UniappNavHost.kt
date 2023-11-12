@@ -14,6 +14,7 @@ import io.readian.uniapp.feature.onboarding.navigation.navigateToLoginGraph
 import io.readian.uniapp.feature.onboarding.navigation.navigateToRegistrationGraph
 import io.readian.uniapp.feature.onboarding.navigation.registrationGraph
 import io.readian.uniapp.feature.onboarding.navigation.welcomeGraph
+import io.readian.uniapp.feature.profile.navigation.profileGraph
 
 @Composable
 fun UniappNavHost(
@@ -26,6 +27,8 @@ fun UniappNavHost(
     startDestination = startDestination,
     modifier = modifier,
   ) {
+    adListGraph()
+
     welcomeGraph(
       onLoginClick = {
         navController.navigateToLoginGraph()
@@ -56,6 +59,6 @@ fun UniappNavHost(
       onBackClick = { navController.navigateUp() }
     )
 
-    adListGraph()
+    profileGraph()
   }
 }
