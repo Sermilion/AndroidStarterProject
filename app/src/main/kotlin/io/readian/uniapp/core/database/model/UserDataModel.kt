@@ -10,6 +10,7 @@ data class UserDataModel(
   val username: String,
   val password: String,
   val type: UserType,
+  val loggedIn: Boolean,
 )
 
 enum class UserType {

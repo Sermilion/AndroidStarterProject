@@ -6,6 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import io.readian.uniapp.core.navigation.UniAppNavigationDestination
+import io.readian.uniapp.feature.profile.ui.CreateAdScreen
 import io.readian.uniapp.feature.profile.ui.ProfileScreen
 
 
@@ -14,11 +15,18 @@ object ProfileDestination : UniAppNavigationDestination {
   override val destination: String = "profile_destination"
 }
 
-fun NavController.navigateToProfileGraph(navOptions: NavOptions? = null) {
-  this.navigate(ProfileDestination.route, navOptions)
+object CreateAdDestination : UniAppNavigationDestination {
+  override val route: String = "create_ad_route"
+  override val destination: String = "create_ad_destination"
 }
 
-fun NavGraphBuilder.profileGraph() {
+fun NavController.navigateCreateAdGraph(navOptions: NavOptions? = null) {
+  this.navigate(CreateAdDestination.route, navOptions)
+}
+
+fun NavGraphBuilder.profileGraph(
+  onCreateAd: () -> Unit,
+) {
   navigation(
     route = ProfileDestination.route,
     startDestination = ProfileDestination.destination,
@@ -26,7 +34,22 @@ fun NavGraphBuilder.profileGraph() {
     composable(
       route = ProfileDestination.destination,
     ) {
-      ProfileScreen()
+      ProfileScreen(onCreateAd = onCreateAd)
+    }
+  }
+}
+
+fun NavGraphBuilder.createAdGraph(
+  onClose: () -> Unit,
+) {
+  navigation(
+    route = CreateAdDestination.route,
+    startDestination = CreateAdDestination.destination,
+  ) {
+    composable(
+      route = CreateAdDestination.destination,
+    ) {
+      CreateAdScreen(onClose = onClose)
     }
   }
 }

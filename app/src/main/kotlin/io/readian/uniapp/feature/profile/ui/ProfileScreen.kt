@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowForwardIos
 import androidx.compose.material.icons.outlined.Home
@@ -23,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -32,29 +35,38 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import io.readian.android.R
 import io.readian.uniapp.core.database.model.UserType
 import io.readian.uniapp.core.designsystem.icon.ReadianIcons
 import io.readian.uniapp.core.designsystem.icon.UserPlaceholder
+import io.readian.uniapp.feature.common.composable.AdItem
 import io.readian.uniapp.feature.profile.ProfileContract
 import io.readian.uniapp.feature.profile.ProfileViewModel
+import java.util.UUID
 
 @Composable
 fun ProfileScreen(
-  viewModel: ProfileViewModel = hiltViewModel()
+  viewModel: ProfileViewModel = hiltViewModel(),
+  onCreateAd: () -> Unit,
 ) {
   val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-  when(val state = uiState) {
+  when (val state = uiState) {
     ProfileContract.UiState.Error -> {
       // error
     }
+
     ProfileContract.UiState.Loading -> CircularProgressIndicator()
     is ProfileContract.UiState.Profile -> ProfileScreen(
       state = state,
       onLogoutClick = {
         viewModel.logout()
       },
+      onRemoveAd = {
+        viewModel.removeAd(it)
+      },
+      onCreateAd = onCreateAd,
     )
   }
 }
@@ -64,6 +76,8 @@ fun ProfileScreen(
 fun ProfileScreen(
   state: ProfileContract.UiState.Profile,
   onLogoutClick: () -> Unit,
+  onCreateAd: () -> Unit,
+  onRemoveAd: (UUID) -> Unit,
 ) {
   Scaffold(
     modifier = Modifier.systemBarsPadding(),
@@ -91,51 +105,92 @@ fun ProfileScreen(
         .padding(paddingValues),
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+      val listState = rememberLazyListState()
 
-      Image(
-        imageVector = ReadianIcons.UserPlaceholder,
-        contentDescription = null,
-        modifier = Modifier
-          .size(160.dp)
-          .padding(top = 36.dp),
-        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
-      )
+      LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        state = listState,
+        contentPadding = paddingValues,
+      ) {
 
-      Text(
-        text = state.username,
-        modifier = Modifier.padding(vertical = 8.dp)
-      )
+        item {
+          Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+          ) {
+            Image(
+              imageVector = ReadianIcons.UserPlaceholder,
+              contentDescription = null,
+              modifier = Modifier
+                .size(140.dp),
+              colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
+            )
 
-      Divider(modifier = Modifier.padding(start = 16.dp))
-      ProfileElement(
-        name = "Email",
-        onClick = {
+            Text(
+              text = state.username,
+              modifier = Modifier.padding(vertical = 8.dp)
+            )
 
-        },
-      )
-      ProfileElement(
-        name = "Change Password",
-        onClick = {
-
-        },
-      )
-      ProfileElement(
-        name = "Logout",
-        onClick = onLogoutClick,
-      )
-
-      when (state.type) {
-        UserType.Advertiser -> {
-          // show create ad button
-          // show created ads
+            Text(
+              text = state.type.name,
+              modifier = Modifier.padding(vertical = 8.dp)
+            )
+          }
         }
-        UserType.Company -> {
-          // show selected ads
+
+        item {
+          Divider(modifier = Modifier.padding(start = 16.dp))
         }
-        UserType.None -> {
-          // intentionally left empty
+
+        item {
+          ProfileElement(
+            name = "Email",
+            onClick = {
+
+            },
+          )
+        }
+
+        item {
+          ProfileElement(
+            name = "Change Password",
+            onClick = {
+
+            },
+          )
+        }
+
+        item {
+          ProfileElement(
+            name = "Logout",
+            onClick = onLogoutClick,
+          )
+        }
+
+        if (state.type == UserType.Advertiser) {
+          item {
+            TextButton(onClick = onCreateAd) {
+              Text(
+                text = "Create Ad",
+                style = MaterialTheme.typography.bodyMedium,
+              )
+            }
+          }
+        }
+
+        val items = state.ads
+
+        items(count = items.size) { index ->
+          AdItem(
+            item = items[index],
+            onClick = {},
+            onRemove = {
+              onRemoveAd(items[index].id)
+            },
+          )
         }
       }
+      // show created ads
     }
   }
 }

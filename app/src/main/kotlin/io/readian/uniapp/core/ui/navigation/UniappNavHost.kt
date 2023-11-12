@@ -14,6 +14,8 @@ import io.readian.uniapp.feature.onboarding.navigation.navigateToLoginGraph
 import io.readian.uniapp.feature.onboarding.navigation.navigateToRegistrationGraph
 import io.readian.uniapp.feature.onboarding.navigation.registrationGraph
 import io.readian.uniapp.feature.onboarding.navigation.welcomeGraph
+import io.readian.uniapp.feature.profile.navigation.createAdGraph
+import io.readian.uniapp.feature.profile.navigation.navigateCreateAdGraph
 import io.readian.uniapp.feature.profile.navigation.profileGraph
 
 @Composable
@@ -59,6 +61,14 @@ fun UniappNavHost(
       onBackClick = { navController.navigateUp() }
     )
 
-    profileGraph()
+    profileGraph(
+      onCreateAd = {
+        navController.navigateCreateAdGraph()
+      }
+    )
+
+    createAdGraph(
+      onClose = { navController.navigateUp() },
+    )
   }
 }

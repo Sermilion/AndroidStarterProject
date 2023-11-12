@@ -1,5 +1,6 @@
 package io.readian.uniapp.feature.onboarding.signup
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,12 +40,16 @@ class SignUpViewModel @Inject constructor(
     type: UserType,
   ) {
     viewModelScope.launch {
-      repository.saveUser(
-        username = username,
-        email = email,
-        password = password,
-        type = type,
-      )
+      try {
+        repository.saveUser(
+          username = username,
+          email = email,
+          password = password,
+          type = type,
+        )
+      } catch (e: SQLiteConstraintException) {
+        // user exists
+      }
     }
   }
 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import io.readian.uniapp.core.designsystem.component.ReadianBackground
 import io.readian.uniapp.core.designsystem.theme.ReadianTheme
 import io.readian.uniapp.core.ui.navigation.ReadianNavigationBar
@@ -39,6 +41,9 @@ fun UniappApp(
   ReadianTheme {
     ReadianBackground {
       UpdateChecker {
+        val systemUiController = rememberSystemUiController()
+        systemUiController.setSystemBarsColor(MaterialTheme.colorScheme.background)
+
         val topLevelDestinations = appState.topLevelDestinations
         Scaffold(
           modifier = Modifier

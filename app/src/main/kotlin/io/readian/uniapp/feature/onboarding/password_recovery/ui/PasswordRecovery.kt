@@ -60,7 +60,7 @@ fun PasswordRecoveryScreen(
 
       var email by remember { mutableStateOf("") }
 
-      io.readian.uniapp.core.designsystem.component.CredentialTextField(
+      io.readian.uniapp.core.designsystem.component.UniAppTextField(
         value = email,
         label = "Enter email",
         onValueChanged = {

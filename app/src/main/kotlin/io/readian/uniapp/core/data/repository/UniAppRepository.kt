@@ -1,11 +1,14 @@
 package io.readian.uniapp.core.data.repository
 
+import android.database.sqlite.SQLiteConstraintException
 import io.readian.uniapp.core.database.UniAppDatabase
 import io.readian.uniapp.core.database.model.AdDataModel
-import io.readian.uniapp.core.database.model.LoggedUser
+import io.readian.uniapp.core.database.model.UserAdsDataModel
 import io.readian.uniapp.core.database.model.UserDataModel
 import io.readian.uniapp.core.database.model.UserType
+import io.readian.uniapp.core.database.model.UsersAdsRelationDataModel
 import kotlinx.coroutines.flow.Flow
+import java.util.UUID
 import javax.inject.Inject
 
 class UniAppRepository @Inject constructor(
@@ -23,6 +26,7 @@ class UniAppRepository @Inject constructor(
         email = email,
         password = password,
         type = type,
+        loggedIn = false,
       )
     )
   }
@@ -38,46 +42,73 @@ class UniAppRepository @Inject constructor(
   }
 
   fun getAds(): Flow<List<AdDataModel>> {
-    return database.advertisersDao().getAll()
+    return database.adsDao().getAll()
   }
 
-  suspend fun getAdsByName(name: String): AdDataModel? {
-    return database.advertisersDao().selectByName(name)
+  fun getCreatedAdsForUser(email: String): Flow<List<AdDataModel>> {
+    return database.adsDao().getCreatedAdsForUser(email)
+  }
+
+  fun getUserWithAds(email: String): Flow<UserAdsDataModel?> {
+    return database.userDao().getUserAndAds(email)
   }
 
   suspend fun saveAd(
-    name: String,
-    price: Int,
-    description: String,
-    image: String,
-    category: String,
-    username: String,
+    adId: UUID,
+    email: String,
   ) {
-    database.advertisersDao().insert(
+    try {
+      database.userAdsRelationDao().insert(
+        UsersAdsRelationDataModel(
+          email = email,
+          id = adId,
+          connectionId = UUID.randomUUID(),
+        )
+      )
+    } catch (e: SQLiteConstraintException) {
+      // ignore
+    }
+  }
+
+  suspend fun removeAdFromProfile(adId: UUID) {
+    database.userAdsRelationDao().delete(adId)
+  }
+
+  suspend fun removeAd(adId: UUID) {
+    database.adsDao().deleteAd(adId)
+  }
+
+  suspend fun addAd(
+    adName: String,
+    description: String,
+    price: Int,
+    category: String,
+    email: String,
+  ) {
+    database.adsDao().insert(
       AdDataModel(
-        name = name,
+        email = email,
+        name = adName,
         price = price,
         description = description,
-        image = image,
+        image = "",
         category = category,
-        username = username,
       )
     )
   }
 
   suspend fun saveLoggedUser(
     email: String,
-    password: String,
-    type: UserType,
+    logged: Boolean,
   ) {
-    database.loggedUserDao().saveLoggedUser(LoggedUser(email, password, type))
+    database.userDao().setUserLogged(email, logged)
   }
 
-  fun getLoggedUser(): Flow<LoggedUser?> {
-    return database.loggedUserDao().getLoggedUser()
+  fun getLoggedUserFlow(): Flow<UserDataModel?> {
+    return database.userDao().getLoggedUserFlow()
   }
 
-  suspend fun deleteLoggedUser() {
-    database.loggedUserDao().deleteLoggedUser()
+  suspend fun getLoggedUser(): UserDataModel? {
+    return database.userDao().getLoggedUser()
   }
 }

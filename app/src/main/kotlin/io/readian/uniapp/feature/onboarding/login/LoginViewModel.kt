@@ -29,11 +29,9 @@ class LoginViewModel @Inject constructor(
         password = password,
       )
       if (user != null) {
-        repository.deleteLoggedUser()
         repository.saveLoggedUser(
           email = user.email,
-          password = user.password,
-          type = user.type,
+          logged = true,
         )
         setEffect { LoginSuccess }
       } else {

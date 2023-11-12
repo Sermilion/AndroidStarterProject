@@ -5,22 +5,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CredentialTextField(
+fun UniAppTextField(
   value: String,
   label: String,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   isError: Boolean = false,
   visualTransformation: VisualTransformation = VisualTransformation.None,
+  keyboardOptions: KeyboardOptions = KeyboardOptions(
+    imeAction = ImeAction.Done,
+  ),
   onValueChanged: (String) -> Unit,
 ) {
   OutlinedTextField(
@@ -34,7 +36,7 @@ fun CredentialTextField(
     maxLines = 1,
     singleLine = true,
     onValueChange = onValueChanged,
-    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+    keyboardOptions = keyboardOptions,
     label = { Text(text = label) },
     visualTransformation = visualTransformation,
   )

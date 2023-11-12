@@ -27,15 +27,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.readian.android.R
-import io.readian.uniapp.core.designsystem.component.CredentialTextField
+import io.readian.uniapp.core.designsystem.component.UniAppTextField
 import io.readian.uniapp.core.designsystem.component.HeaderText
 import io.readian.uniapp.core.designsystem.component.PrimaryButton
 import io.readian.uniapp.feature.onboarding.login.LoginContract
@@ -43,7 +45,7 @@ import io.readian.uniapp.feature.onboarding.login.LoginContract.SideEffect.Navig
 import io.readian.uniapp.feature.onboarding.login.LoginViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreen(
   onBackClick: () -> Unit,
@@ -96,12 +98,14 @@ fun LoginScreen(
       var email by remember { mutableStateOf("") }
       var password by remember { mutableStateOf("") }
 
+      val keyboardController = LocalSoftwareKeyboardController.current
+
       HeaderText(
         text = stringResource(id = R.string.label_log_in),
         modifier = Modifier.padding(top = 32.dp),
       )
 
-      CredentialTextField(
+      UniAppTextField(
         value = email,
         label = "Enter email",
         onValueChanged = {
@@ -110,7 +114,7 @@ fun LoginScreen(
         modifier = Modifier.padding(top = 40.dp)
       )
 
-      CredentialTextField(
+      UniAppTextField(
         value = password,
         label = "Enter password",
         onValueChanged = {
@@ -131,6 +135,7 @@ fun LoginScreen(
       PrimaryButton(
         text = stringResource(id = R.string.label_log_in),
         onClick = {
+          keyboardController?.hide()
           viewModel.login(
             email = email,
             password = password,
